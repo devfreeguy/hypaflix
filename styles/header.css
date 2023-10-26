@@ -1,0 +1,207 @@
+/**
+    #Import styles
+*/
+
+@import url(./variables.css);
+@import url(./animations.css);
+
+/* ------------ */
+
+
+/**
+    #Header styles
+*/
+
+header {
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}
+
+.header {
+  background: var(--bg-color);
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 500ms ease-in-out;
+}
+
+.left-header,
+.right-header {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  transition: all 1s ease;
+}
+
+.left-header {
+  justify-content: flex-start;
+}
+
+.right-header {
+  justify-content: flex-end;
+}
+
+#nav-icon {
+  display: none;
+  width: var(--header-logo-width);
+  height: var(--header-logo-height);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  padding-top: 0.3rem;
+}
+
+#header-logo {
+  transition: all 500ms ease;
+  width: var(--header-logo-width);
+  height: var(--header-logo-height);
+  object-fit: cover;
+}
+
+.nav-bar {
+  margin-left: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  transition: all 500ms ease;
+}
+
+.nav-bar li a h4 {
+  color: var(--accent-color);
+}
+
+.nav-bar li a h4:hover {
+  color: var(--color-highlight);
+}
+
+.nav-item {
+  display: flex;
+  font-size: var(--smaller-size);
+}
+
+.search-box {
+  padding: var(--button-padding);
+  background: var(--card-color);
+  display: flex;
+  gap: 5px;
+  border-radius: var(--button-radius);
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  width: clamp(7rem, 15vw, 10rem);
+  border: none;
+}
+
+.search-btn {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-btn {
+  display: flex;
+  align-items: center;
+  padding: var(--button-padding);
+  background-color: var(--primary-color);
+  border-radius: var(--button-radius);
+  gap: 10px;
+}
+
+.sign-in-btn-text,
+.search-bar,
+.search-icon {
+  font-size: var(--medium-font-size);
+}
+
+@media screen and (max-width: 992px) {
+  /*-==========- Laptops and big tablet screens -==========*/
+
+  /* .search-bar {
+        width: 50px;
+    } */
+}
+
+@media screen and (max-width: 768px) {
+  /*-==========- Tablet screens -==========*/
+
+  nav {
+    top: 4rem;
+    position: absolute;
+    width: 100%;
+    background: var(--bg-color);
+    padding-bottom: 1rem;
+    z-index: -10;
+    transform: translateY(-200px);
+  }
+
+  nav.active {
+    animation: slideDown 500ms linear;
+    transform: translateY(0);
+
+    /* transform: translateY(0); */
+  }
+
+  nav.inactive {
+    animation: slideUp 500ms linear;
+    transform: translateY(-200px);
+    /* transform: translateY(0); */
+  }
+
+  #nav-icon {
+    display: flex;
+  }
+
+  .nav-item {
+    height: var(--nav-height);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-item h4 {
+    display: flex;
+    padding: 0 0.9rem;
+    width: var(--tab-container);
+    height: 100%;
+    align-items: center;
+  }
+
+  .nav-bar {
+    flex-direction: column;
+    margin: 0;
+    justify-items: center;
+  }
+
+  #header-logo {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  /* .search-bar {
+    display: none;
+  }
+
+  .search-box.fullsearch {
+    position: absolute;
+    width: 100%;
+    height: var(--header-height);
+  }
+
+  .search-bar.fullsearch {
+    margin-left: 1rem;
+    flex: 1;
+  } */
+}
+
+@media screen and (max-width: 576px) {
+  /*-==========- Mini-tablets screens -==========*/
+  .nav-item h4 {
+    padding: 0 0.5rem;
+    width: var(--mobile-container);
+  }
+}

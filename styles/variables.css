@@ -1,0 +1,95 @@
+/* 
+Table of context
+ - Color
+ - Transition
+ - Container size
+ - Padding
+ - Curves (Border radius)
+ - Font size
+ - Icon size
+ - Logo size
+ - Gaps
+ - Tab nav height 
+*/
+
+:root {
+  /* Colors */
+  --primary-color: #5873ff;
+  --accent-color: #e3f2fd;
+  --color-highlight: #90caf9;
+  --normal-color: #42a5f5;
+  --bg-color: #090c1d;
+  --secondary-bg-color: #0d1228;
+  --card-color: #141937;
+  --white-color: #fff;
+  --icon-color: #858e9d;
+  --filter-tab-bg-color: rgba(88, 115, 255, 0.3);
+  --light-dark-bg-color: rgba(0, 0, 0, 0.3);
+
+  /* Transitions */
+  --slower-transformer: all 5s ease-in-out;
+  --slow-transformer: all 400ms ease;
+  --fast-transformer: all 200ms ease;
+
+  /* Container size */
+  --desktop-container: 85%;
+  --tab-container: 90%;
+  --mobile-container: 95%;
+
+  /* --desktop-sidebar-size: clamp(12rem, 20vw, 16rem);
+  --tablet-sidebar-size: clamp(12rem, 20vw, 16rem);
+
+  --desktop-carousel-size: clamp(380px, 30vw, 500px);
+  --tablet-carousel-size: clamp(280px, 50vw, 380px); */
+
+  /* Padding */
+  --mini-padding: clamp(0.2rem, 3vw, 0.3rem) clamp(0.4rem, 3vw, .6rem);
+  --button-padding: clamp(0.4rem, 20vw, 0.6rem) clamp(0.5rem, 20vw, 0.8rem);
+  --medium-button-padding: clamp(0.2rem, 20vw, 0.5rem) clamp(0.3rem, 20vw, 0.7rem);
+  --action-tab-padding: clamp(0.8rem, 20vw, 1rem) clamp(0.6rem, 20vw, 0.8rem);
+  --filter-tab-padding: clamp(0.13rem, 7vw, 0.63rem) clamp(0.1rem, 8vw, 0.6rem) clamp(0.3rem, 10vw, 0.8rem);
+
+  /* Curves (Border radius) */
+  --button-radius: 0.4rem;
+  --border-radius: 1.5rem;
+
+  /* Font sizes */
+  --large-font-size: clamp(1rem, 5vw, 2rem);
+  --medium-font-size: clamp(0.5rem, 2.5vw, 0.8rem);
+  --normal-font-size: clamp(0.5rem, 1vw, 1.5rem);
+  --small-font-size: clamp(0.2rem, 1vw, 0.5rem);
+
+  /* Icon size */
+  --small-icon: clamp(0.6rem, 3vw, 1rem);
+  --medium-icon: clamp(0.8rem, 3vw, 1rem);
+  --normal-icon: clamp(1rem, 3vw, 1.1rem);
+  --big-icon: clamp(0.3rem, 6vw, 1rem);
+
+  /* Logo size */
+  --header-logo-width: clamp(1.8rem, 3vw, 3rem);
+  --header-logo-height: clamp(1.8rem, 3vw, 3rem);
+
+  /* Gaps */
+  --small-gap: clamp(4px, 4vw, 8px);
+
+  /* Tab nav height */
+  --nav-height: 2rem;
+
+  /* Height */
+  --header-height: clamp(4rem, 10vw, 5rem);
+}
+
+@media screen and (max-width: 768px) {
+  /*-==========- Tablet screens -==========*/
+
+  :root {
+    /* Padding */
+    --button-padding: clamp(0.3rem, 5vw, 0.5rem) clamp(0.4rem, 5vw, 0.6rem);
+    --medium-button-padding: clamp(0.2rem, 5vw, 0.5rem)
+      clamp(0.3rem, 5vw, 0.7rem);
+
+    /* Curves (Border radius) */
+    --button-radius: 0.3rem;
+    --border-radius: 1rem;
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hypaflix - 404</title>
+    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url(./variables.css);
+
+      * {
+        box-sizing: border-box;
+        left: 0;
+        top: 0;
+        font-family: "Inter", sans-serif;
+        font-family: "Nunito", sans-serif;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        padding-bottom: 8rem;
+      }
+
+      #image {
+        width: 60vw;
+        height: fit-content;
+        max-width: 300px;
+        object-fit: contain;
+      }
+      p {
+        /* font-size: var(--medium-font-size); */
+        color: var(--highlight-color);
+        max-width: 60vw;
+        text-align: center;
+      }
+      h4 {
+        line-height: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>404</h1> -->
+    <img src="./resourses/images/404.png" id="image" />
+    <p>You are try to access an invalid page on our site</p>
+    <a href="index.html"
+      ><button id="btn"><h4>Go back home</h4></button></a
+    >
+  </body>
+</html>

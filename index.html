@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This is a free movie site" />
+    <title>Hypaflix - Movies</title>
+
+    <!-- Link favicon -->
+    <link
+      rel="shortcut icon"
+      href="./resourses/images/favicon.png"
+      type="image/x-icon"
+    />
+
+    <!-- Link google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=Nunito:wght@400;500;600;700;800;900;1000&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link styles -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./styles/general.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
+    <!------------------------------
+           Scripts
+        ------------------------------>
+
+    <script
+      src="https://unpkg.com/ionicons@latest/dist/ionicons.js"
+      defer
+    ></script>
+    <script type="module" src="main.js" defer></script>
+  </head>
+
+  <!------------------------------
+     Body
+  ------------------------------>
+
+  <body>
+    <div id="loading">
+      <img src="./resourses/images/logo.png" download="false" />
+    </div>
+    <!-- Header -->
+    <header>
+      <div class="container header">
+        <!-- Left header -->
+        <div class="left-header">
+          <!-- Hamburger -->
+          <i class="bx bx-menu large-icon" id="nav-icon"></i>
+          <!-- Logo -->
+          <img src="./resourses/images/icon.png" id="header-logo" />
+
+          <!-- Nav items -->
+          <nav class="" id="nav">
+            <ul class="nav-bar">
+              <li class="nav-list-item">
+                <a href="#" class="nav-item"><h4>Home</h4></a>
+              </li>
+              <li class="nav-list-item">
+                <a href="#category-section" class="nav-item"
+                  ><h4>Category</h4></a
+                >
+              </li>
+              <li class="nav-list-item">
+                <a href="#" class="nav-item"><h4>Contact us</h4></a>
+              </li>
+              <li class="nav-list-item">
+                <a href="#" class="nav-item"><h4>About us</h4></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Right header -->
+        <div class="right-header">
+          <div class="search-box">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              class="search-bar"
+              required
+            />
+            <button class="search-btn">
+              <i class="bx bx-search-alt large-icon search-icon"></i>
+            </button>
+          </div>
+          <!-- Account holder -->
+          <div class="account-holder">
+            <div class="sign-in-btn">
+              <span class="sign-in-btn-text sign-in-btn-text" readonly
+                >Sign in</span
+              >
+              <!-- Sign in icon -->
+              <i
+                class="bx bx-log-in-circle sign-in-btn-text medium-icon"
+                id=""
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+
+    <main>
+      <div class="main container">
+        <!-- Banner post -->
+        <section class="banner-post" id="banner">
+          <!-- Default banner movie data -->
+          <div
+            class="banner"
+            style="background-image: url(./resourses/images/backdrop.png)"
+          >
+            <div class="gradient-overlay"></div>
+            <div class="banner-overlay">
+              <div class="banner-data">
+                <div class="banner-info">
+                  <span class="banner-info-item-text"
+                    ><i class="bx bx-star small-icon"></i> Rating</span
+                  >
+                  <span class="banner-info-item-text"
+                    ><i class="bx bx-category small-icon"></i> Genre</span
+                  >
+                  <span class="banner-info-item-text"
+                    ><i class="bx bx-time small-icon"></i> Date</span
+                  >
+                </div>
+                <div class="banner-title-action">
+                  <h3 id="movie-title">Movie title</h3>
+                  <div class="banner-action">
+                    <button id="medium-btn" class="banner-btn">
+                      Watch later
+                    </button>
+                    <i
+                      class="bx bx-heart banner-btn medium-icon"
+                      id="relative-btn"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+              <div class="banner-hover">
+                <i
+                  class="bx bx-info-circle medium-icon"
+                  id="banner-hover-icon"
+                ></i>
+              </div>
+            </div>
+            <div class="banner-item-overview-layer blur-bg">
+              <h3>
+                <span class="banner-item-overview-text">Movie summary</span
+                ><br /><br />
+                <span class="banner-item-overview"></span>
+              </h3>
+            </div>
+          </div>
+
+          <!-- ------ -->
+        </section>
+
+        <!-- Tab section -->
+        <section class="tab-section">
+          <div id="action-tab" class="container">
+            <!-- Filter tab -->
+            <!-- Populer, Newest, Top rated -->
+            <div class="filter-tab">
+              <form action="#" class="filter-tab-form">
+                <div class="filter-item">
+                  <input
+                    type="radio"
+                    name="filter"
+                    id="popular-movies"
+                    value="popular"
+                    class="gone"
+                    checked
+                  />
+                  <label for="popular-movies" class="medium-font-size"
+                    >Popular</label
+                  >
+                </div>
+                <div class="filter-item">
+                  <input
+                    type="radio"
+                    name="filter"
+                    id="upcoming-movies"
+                    value="upcoming"
+                    class="gone"
+                  />
+                  <label for="upcoming-movies" class="medium-font-size"
+                    >Upcoming</label
+                  >
+                </div>
+                <div class="filter-item">
+                  <input
+                    type="radio"
+                    name="filter"
+                    id="top-rated-movies"
+                    value="toprated"
+                    class="gone"
+                  />
+                  <label for="top-rated-movies" class="medium-font-size"
+                    >Top rated</label
+                  >
+                </div>
+              </form>
+            </div>
+
+            <section>
+              <div class="category-dropdown">
+                <h4 class="genres-tab medium-font-size">
+                  All categories <i class="bx bx-chevron-down normal-icon"></i>
+                </h4>
+              </div>
+                <div class="category-dd-list">
+                  <form action="#" id="category-dd-form">
+                    <div class="cdd-item">
+                      <input
+                        type="radio"
+                        name="category"
+                        id="all"
+                        value="All categories"
+                        class="gone"
+                        checked
+                      />
+                      <label for="all" class="medium-font-size"
+                        >All categories <i class="bx bx-check"></i
+                      ></label>
+                    </div>
+                    
+                  </form>
+                </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="list-grid">
+          <div class="container" id="grid-view">
+            <!-- Video list item -->
+            <!-- <div class="video-list-item">
+              <div class="gradient-overlay video-list-item-overlay">
+                <div class="video-list-item-top">
+                  <i class='bx bx-heart hover-icon medium-icon'></i>
+                  <i class='bx bx-info-circle hover-icon medium-icon'></i>
+                </div>
+                <div class="video-list-item-info">
+                  <h3 class="video-list-item-title">Movie title</h3>
+                  <h4 class="video-list-item-info-text medium-font-size">Action &bull; 2023</h4>
+                </div>
+              </div>
+              <div class="video-list-more-option blur-bg">
+              </div>
+            </div> -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
