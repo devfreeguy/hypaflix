@@ -116,6 +116,20 @@ header {
 .search-icon {
   font-size: var(--medium-font-size);
 }
+#account-holder {
+  display: flex;
+  align-items: center;
+}
+
+#profile-picture {
+  height: clamp(2rem, 5vw, 2.5rem);
+  width: clamp(2rem, 5vw, 2.5rem);
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 2px;
+  border: solid 2px var(--color-highlight);
+  display: none;
+}
 
 @media screen and (max-width: 992px) {
   /*-==========- Laptops and big tablet screens -==========*/

@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="This is a free movie site" />
-    <title>Hypaflix - Movies</title>
+    <title>Home - Hypaflix</title>
 
     <!-- Link favicon -->
     <link
       rel="shortcut icon"
-      href="./resourses/images/favicon.png"
+      href="./resourses/images/icon.png"
       type="image/x-icon"
     />
 
@@ -23,8 +23,8 @@
     />
 
     <!-- Link styles -->
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="./styles/general.css" />
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
@@ -94,8 +94,9 @@
             </button>
           </div>
           <!-- Account holder -->
-          <div class="account-holder">
-            <div class="sign-in-btn">
+          <div id="account-holder">
+            <a href="./pages/auth.html">
+              <div class="sign-in-btn">
               <span class="sign-in-btn-text" readonly
                 >Sign in</span
               >
@@ -105,6 +106,10 @@
                 id=""
               ></i>
             </div>
+            </a>
+            <a href="#">
+              <img src="./resourses/images/genre-images/science-fiction.jpg" id="profile-picture">
+            </a>
           </div>
         </div>
       </div>
@@ -141,10 +146,12 @@
                     <button id="watch-banner-movie-btn" class="btn hover">
                       Watch later
                     </button>
-                    <i
-                      class="bx bx-heart banner-btn medium-icon relative-btn hover"
-                      id="like-banner-movie-btn"
+                    <button id="like-banner-movie-btn">
+                      <i
+                      class="bx bx-heart medium-icon hover"
+                      
                     ></i>
+                    </button>
                   </div>
                 </div>
               </div>

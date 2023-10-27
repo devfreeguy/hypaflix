@@ -32,9 +32,6 @@ const searchBar = document.querySelector(".search-bar");
 const searchBox = document.querySelector(".search-box");
 const searchIcon = document.querySelector(".search-icon");
 
-const bannerMovieInfo = document.querySelector(".banner-item-overview-layer");
-const bannerHoverIcon = document.getElementById("banner-hover-icon");
-const bannerMovieInfoBtn = document.querySelector(".banner-hover");
 const categoryDropdownBtn = document.querySelector(".category-dropdown");
 const categoryDropdown = document.querySelector(".category-dd-list");
 
@@ -44,9 +41,7 @@ const prevMovieData = document.getElementById("prevPage");
 let dropdownCategoryFilter = "All categories";
 let gridMovieUrl = POPULAR_MOVIES;
 
-let tabPos = document.querySelector(
-  "input[name='filter']:checked"
-).value;
+let tabPos = document.querySelector("input[name='filter']:checked").value;
 let paging = false;
 let page;
 
@@ -163,23 +158,6 @@ function toggleHamburger() {
   }
 }
 
-function toggleBannerInfo() {
-  console.log("working");
-  if (bannerHoverIcon.className === "bx bx-info-circle medium-icon") {
-    bannerHoverIcon.className = "bx bx-x medium-icon";
-    bannerMovieInfo.style.display = "flex";
-    bannerMovieInfoBtn.classList.add("active");
-  } else {
-    bannerHoverIcon.className = "bx bx-info-circle medium-icon";
-    bannerMovieInfo.style.display = "none";
-    bannerMovieInfoBtn.classList.remove("active");
-  }
-
-  (() => {
-    bannerMovieInfo.classList.toggle("active");
-  })();
-}
-
 /* ------------------------------ *\
   //Display banner movie item functions
 \* ------------------------------ */
@@ -217,13 +195,15 @@ function displayBannerMovie(list) {
         <div class="banner-title-action">
           <h3 id="movie-title">${item[i].title}</h3>
           <div class="banner-action">
-            <button id="medium-btn" class="banner-btn">
+            <button class="medium-btn banner-btn-hover" id="banner-btn">
               Watch later
             </button>
-            <i
-              class="bx bx-heart banner-btn medium-icon"
-              id="relative-btn"
-            ></i>
+            <button class="relative-btn banner-btn-hover" id="like-banner-movie-btn">
+                      <i
+                      class="bx bx-heart medium-icon"
+                      
+                    ></i>
+                    </button>
           </div>
         </div>
       </div>
@@ -245,10 +225,32 @@ function displayBannerMovie(list) {
     </div>
   </div>`;
     });
+    const bannerMovieInfo = document.querySelector(
+      ".banner-item-overview-layer"
+    );
+    const bannerHoverIcon = document.getElementById("banner-hover-icon");
+    const bannerMovieInfoBtn = document.querySelector(".banner-hover");
+
     bannerMovieInfoBtn.addEventListener("click", () => {
       console.log("pressed");
       toggleBannerInfo();
     });
+    function toggleBannerInfo() {
+      (() => {
+        bannerMovieInfoBtn.classList.toggle("active");
+        bannerMovieInfo.classList.toggle("active");
+      })();
+
+      if (bannerHoverIcon.className === "bx bx-x medium-icon") {
+        bannerHoverIcon.className = "bx bx-info-circle medium-icon";
+        console.log("Now visible");
+      } else {
+        bannerHoverIcon.className = "bx bx-x medium-icon";
+        console.log("Now hidden");
+        // bannerMovieInfo.style.display = "none";
+      }
+      
+    }
   }
 }
 

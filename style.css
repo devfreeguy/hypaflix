@@ -9,57 +9,6 @@
 
 /* ------------ */
 
-/**
-    #General styles
-*/
-
-/**
-    #General styles
-*/
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  font-family: "Inter", sans-serif;
-  font-family: "Nunito", sans-serif;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--accent-color);
-  line-height: 1;
-}
-
-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-a {
-  text-decoration: none;
-  color: var(--accent-color);
-}
-
-button {
-  border: none;
-  color: var(--accent-color);
-  background: none;
-}
-
-img {
-  width: 100%;
-  object-fit: fit;
-}
-
-main {
-  margin-top: clamp(4rem, 10vw, 5rem);
-}
 /* #main {
   display: flex;
   flex-direction: column;
@@ -109,13 +58,20 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: all 500ms;
 }
 
 .banner-overlay {
   display: flex;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, black, transparent, transparent, black);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7),
+    transparent,
+    transparent,
+    rgba(0, 0, 0, 0.7)
+  );
   position: absolute;
   align-items: flex-end;
   border-radius: var(--border-radius);
@@ -163,7 +119,17 @@ main {
   overflow: hidden;
 }
 
-.banner-btn {
+#like-banner-movie-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+#like-banner-movie-btn i {
+  font-size: calc(var(--medium-font-size) * 3 / 2);
+}
+
+#banner-btn {
   font-size: var(--medium-font-size);
   padding: var(--button-padding);
   background-color: var(--primary-color);
@@ -180,7 +146,12 @@ main {
   padding: clamp(1rem, 50%, 3rem);
   align-items: center;
   display: none;
-  /* display: flex; */
+  opacity: 0;
+  transform: all 500ms;
+}
+
+.banner-item-overview-layer h3 {
+  margin-bottom: 3rem;
 }
 
 .banner-hover {
@@ -196,12 +167,22 @@ main {
   z-index: 10;
 }
 
+.banner:hover {
+  transform: scale(0.99);
+  background-size: 101%;
+}
+
 .banner:hover .banner-hover {
   display: flex;
 }
 
 .banner-hover.active {
   display: flex;
+}
+
+.banner-item-overview-layer.active {
+  display: flex;
+  opacity: 1;
 }
 
 .banner-hover:hover {
@@ -213,8 +194,8 @@ main {
 }
 
 .banner-item-overview {
-  line-height: 1.2rem;
-  font-size: clamp(0.8rem, 1.1vw, 1.1rem);
+  line-height: 1.2;
+  font-size: clamp(.9rem, 1.8vw, 1.2rem);
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
@@ -389,7 +370,8 @@ input[type="radio"].gone {
     #Video list view styles
 */
 
-#grid-view,#category-list-grid-view {
+#grid-view,
+#category-list-grid-view {
   width: 100%;
   display: grid;
   padding: 10px 0;
@@ -408,6 +390,7 @@ input[type="radio"].gone {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: var(--card-color);
   display: flex;
   max-width: 250px;
 }
@@ -458,12 +441,12 @@ input[type="radio"].gone {
   opacity: 0.8;
 }
 
-.video-list-item-overlay:hover .video-list-item-top {
-  display: flex;
-}
-
 .video-list-item-overlay:hover {
   background-color: var(--light-dark-bg-color);
+}
+
+.video-list-item-overlay:hover .video-list-item-top {
+  display: flex;
 }
 
 #no-grid-data-found {
@@ -476,7 +459,7 @@ input[type="radio"].gone {
   align-items: center;
 }
 
-#no-grid-data-found.active{
+#no-grid-data-found.active {
   display: flex;
 }
 
@@ -485,7 +468,7 @@ input[type="radio"].gone {
 }
 
 #no-grid-data-found h5 {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 /**
@@ -499,13 +482,12 @@ input[type="radio"].gone {
 }
 
 #pager-text {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 #pager-bg {
   display: flex;
   gap: 2rem;
-  
 }
 
 /**
@@ -519,7 +501,7 @@ input[type="radio"].gone {
   margin-top: 2rem;
 }
 
-#category-list-head{
+#category-list-head {
   text-align: center;
 }
 
@@ -546,7 +528,6 @@ input[type="radio"].gone {
   font-size: var(--large-font-size);
   border-radius: var(--border-radius);
 }
-
 
 @media screen and (max-width: 992px) {
   /*-==========- Laptops and big tablet screens -==========*/

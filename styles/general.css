@@ -27,7 +27,7 @@
     #General styles
 */
 
-/* * {
+* {
   padding: 0;
   box-sizing: border-box;
   top: 0;
@@ -37,10 +37,14 @@
   font-family: "Poppins", sans-serif;
 }
 
+
 body {
+  padding: 0;
+  margin: 0;
   background-color: var(--bg-color);
   color: var(--accent-color);
   line-height: 1;
+  height: 100vh;
 }
 
 img {
@@ -66,8 +70,8 @@ img {
   object-fit: fit;
 }
 
-main {
-  margin-top: clamp(4rem, 10vw, 5rem);
+#main {
+  margin-top: var(--header-height);
 }
 
 .container {
@@ -79,8 +83,8 @@ main {
   width: 100%;
   border-radius: var(--border-radius);
   height: 100%;
-  background: linear-gradient(to bottom, transparent, black);
-} */
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+}
 
 /* ------------ */
 
@@ -144,16 +148,20 @@ li {
   font-size: var(--medium-font-size);
 }
 
-.hover,.light-hover {
+.hover,.light-hover,.banner-btn-hover {
   transition: scale 400ms;
 }
 
+.banner-btn-hover:hover {
+  scale: 1.05;
+}
+
 .hover:hover {
-  scale: 0.9;
+  scale: 0.95;
 }
 
 .light-hover:hover {
-  scale: 0.97;
+  scale: 1.05;
 }
 
 .inactive {
