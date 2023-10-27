@@ -12,7 +12,7 @@ import { parseData } from "./movie-data.js";
 
 // This urls must be in this order to avoid mismap is incorrect
 // pages
-const URLS = [
+let URLS = [
   fetch(TRENDING_MOVIES_URL),
   fetch(POPULAR_MOVIES_URL),
   fetch(UPCOMING_MOVIES_URL),
@@ -21,10 +21,10 @@ const URLS = [
   fetch(LATEST_MOVIES_URL),
 ];
 
-export const totalPagesList = [];
+export let totalPagesList = [];
 export async function request() {
   try {
-    const fetchedData = [];
+    let fetchedData = [];
     await Promise.allSettled(URLS).then((res) =>
       res.map((obj) => {
         obj.status === "fulfilled"
@@ -32,8 +32,8 @@ export async function request() {
           : fetchedData.push({});
       })
     );
-    const list = [];
-    const dataList = await Promise.all(fetchedData.map((item) => item.json()));
+    let list = [];
+    let dataList = await Promise.all(fetchedData.map((item) => item.json()));
     dataList.forEach((element) => {
       // console.log(element.hasOwnProperty("results"));
       if(totalPagesList.length !== 4){
@@ -55,5 +55,5 @@ export async function request() {
 
     console.log(totalPagesList);
     parseData(list);
-  } catch (error) {}
+  } catch (error) {console.log(error);}
 }

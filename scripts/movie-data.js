@@ -6,13 +6,13 @@ import { request } from "./movie-request.js";
 /* ------------------------------ *\
   //Variables declearation
 \* ------------------------------ */
-export const TRENDING_MOVIES = [];
-export const POPULAR_MOVIES = [];
-export const UPCOMING_MOVIES = [];
-export const LATEST_MOVIES = [];
-export const TOP_RATED_MOVIES = [];
-export const GENRES = [];
-const arrays = [
+export let TRENDING_MOVIES = [];
+export let POPULAR_MOVIES = [];
+export let UPCOMING_MOVIES = [];
+export let LATEST_MOVIES = [];
+export let TOP_RATED_MOVIES = [];
+export let GENRES = [];
+let arrays = [
   TRENDING_MOVIES,
   POPULAR_MOVIES,
   UPCOMING_MOVIES,

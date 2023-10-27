@@ -112,7 +112,6 @@ categoryDropdownBtn.addEventListener("click", () => {
 nextMovieData.addEventListener("click", async () => {
   nextPage(tabPos, true);
   paging = true;
-  console.log("next page" + page);
   await getData();
 });
 

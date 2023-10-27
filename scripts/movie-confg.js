@@ -9,10 +9,10 @@ export let upcomingPage = 1;
 export let topRatedPage = 1;
 
 export const API_KEY = "b6f44cc6b4ddd661af0a740d6ff894d2";
-export const TRENDING_MOVIES_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US&page=${trendingPage}`;
-export const POPULAR_MOVIES_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${popularPage}`;
-export const UPCOMING_MOVIES_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${upcomingPage}`;
-export const TOP_RATED_MOVIES_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${topRatedPage}`;
+export let TRENDING_MOVIES_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US&page=${trendingPage}`;
+export let POPULAR_MOVIES_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=${popularPage}`;
+export let UPCOMING_MOVIES_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${upcomingPage}`;
+export let TOP_RATED_MOVIES_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${topRatedPage}`;
 export const LATEST_MOVIES_URL = `https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}`;
 export const GENRES_URL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en`;
 export const imageBaseUrl = "https://image.tmdb.org/t/p/w780";
@@ -30,8 +30,9 @@ export function nextPage(name, action) {
       if(action){popularPage++;}else{popularPage--;}
       console.log(popularPage);
       break;
-    case "upcoming":
-      action ? upcomingPage++ : upcomingPage--;
+      case "upcoming":
+        action ? upcomingPage++ : upcomingPage--;
+        console.log(upcomingPage);
       break;
     case "toprated":
       action ? topRatedPage++ : topRatedPage--;

@@ -116,6 +116,7 @@ header {
 .search-icon {
   font-size: var(--medium-font-size);
 }
+
 #account-holder {
   display: flex;
   align-items: center;
