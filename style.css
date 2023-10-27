@@ -4,6 +4,7 @@
 
 @import url(./styles/variables.css);
 @import url(./styles/header.css);
+@import url(./styles/footer.css);
 @import url(./styles/general.css);
 
 /* ------------ */
@@ -18,6 +19,7 @@
 
 * {
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
   top: 0;
   left: 0;
@@ -58,6 +60,11 @@ img {
 main {
   margin-top: clamp(4rem, 10vw, 5rem);
 }
+/* #main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+} */
 
 .container {
   width: var(--desktop-container);
@@ -148,7 +155,7 @@ main {
 
 #movie-title {
   margin: 0.8rem 0;
-  font-size: var(--large-font-size);
+  font-size: var(--larger-font-size);
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -382,13 +389,13 @@ input[type="radio"].gone {
     #Video list view styles
 */
 
-#grid-view {
+#grid-view,#category-list-grid-view {
   width: 100%;
   display: grid;
   padding: 10px 0;
   grid-template-columns: repeat(
     auto-fit,
-    minmax(clamp(8rem, 15vw, 12rem), 1fr)
+    minmax(clamp(9rem, 15vw, 12rem), 1fr)
   );
 }
 
@@ -402,6 +409,7 @@ input[type="radio"].gone {
   background-size: cover;
   background-position: center;
   display: flex;
+  max-width: 250px;
 }
 
 .video-list-item-poster {
@@ -457,6 +465,88 @@ input[type="radio"].gone {
 .video-list-item-overlay:hover {
   background-color: var(--light-dark-bg-color);
 }
+
+#no-grid-data-found {
+  width: 100%;
+  height: 65vh;
+  min-height: 300px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#no-grid-data-found.active{
+  display: flex;
+}
+
+#no-grid-data-found * {
+  margin: 5px;
+}
+
+#no-grid-data-found h5 {
+  opacity: .6;
+}
+
+/**
+    #Pager styles
+*/
+
+#gridMoviePagerSection {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--mini-padding);
+}
+
+#pager-text {
+  opacity: .6;
+}
+
+#pager-bg {
+  display: flex;
+  gap: 2rem;
+  
+}
+
+/**
+    #Category grid view styles
+*/
+
+#category-list-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#category-list-head{
+  text-align: center;
+}
+
+.category-list-item {
+  background: var(--card-color);
+  border-radius: var(--border-radius);
+  /* height: clamp(80px, 10vw, 110px); */
+  max-width: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 16/9;
+  margin: 3.5%;
+}
+.category-list-item-name {
+  /* padding: var(--button-padding); */
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: var(--large-font-size);
+  border-radius: var(--border-radius);
+}
+
 
 @media screen and (max-width: 992px) {
   /*-==========- Laptops and big tablet screens -==========*/

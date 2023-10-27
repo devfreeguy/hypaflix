@@ -126,6 +126,12 @@ h5 {
   font-weight: 600;
 }
 
+hr {
+  height: 2px;
+  background-color: var(--line-color);
+  border: none;
+}
+
 li {
   list-style: none;
 }
@@ -138,11 +144,35 @@ li {
   font-size: var(--medium-font-size);
 }
 
+.hover,.light-hover {
+  transition: scale 400ms;
+}
+
+.hover:hover {
+  scale: 0.9;
+}
+
+.light-hover:hover {
+  scale: 0.97;
+}
+
+.inactive {
+  opacity: .6;
+}
+
+progress {
+  appearance: none;
+}
+::-webkit-progress-bar, ::-moz-progress-bar {
+  border: none;
+  background-color: var(--secondary-bg-color);
+}
+
+
+
 /* .normal-font-size {
     font-size: var(--normal-font-size);
 } */
-
-/* ------------ *
 
 
 /**
@@ -165,24 +195,22 @@ li {
   font-size: var(--big-icon);
   color: var(--accent-color);
 }
-/* ------------ *
 
 /**
     #Button styles
 */
 
-#btn {
+.btn {
   padding: var(--button-padding);
   background-color: var(--primary-color);
   border-radius: var(--button-radius);
 }
 
-#relative-btn {
+.relative-btn {
   padding: var(--button-padding);
   background-color: var(--card-color);
   border-radius: var(--button-radius);
 }
-/* ------------ *
     
 /**
     #Blur
@@ -190,8 +218,6 @@ li {
 .blur-bg {
     backdrop-filter: blur(10px);
 }
-
-/* ------------ *
     
 /**
     #Loading screen
@@ -214,7 +240,7 @@ li {
   transform: translateY(-30px);
   opacity: 1;
   display: flex;
-  visibility: visible;
+  /* visibility: visible; */
   transition: opacity 1s, display 1s;
 }
 

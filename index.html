@@ -37,6 +37,7 @@
       src="https://unpkg.com/ionicons@latest/dist/ionicons.js"
       defer
     ></script>
+    <script type="module" src="./scripts/general.js"></script>
     <script type="module" src="main.js" defer></script>
   </head>
 
@@ -95,7 +96,7 @@
           <!-- Account holder -->
           <div class="account-holder">
             <div class="sign-in-btn">
-              <span class="sign-in-btn-text sign-in-btn-text" readonly
+              <span class="sign-in-btn-text" readonly
                 >Sign in</span
               >
               <!-- Sign in icon -->
@@ -112,7 +113,7 @@
     <!-- Main content -->
 
     <main>
-      <div class="main container">
+      <div id="main" class="container">
         <!-- Banner post -->
         <section class="banner-post" id="banner">
           <!-- Default banner movie data -->
@@ -137,12 +138,12 @@
                 <div class="banner-title-action">
                   <h3 id="movie-title">Movie title</h3>
                   <div class="banner-action">
-                    <button id="medium-btn" class="banner-btn">
+                    <button id="watch-banner-movie-btn" class="btn hover">
                       Watch later
                     </button>
                     <i
-                      class="bx bx-heart banner-btn medium-icon"
-                      id="relative-btn"
+                      class="bx bx-heart banner-btn medium-icon relative-btn hover"
+                      id="like-banner-movie-btn"
                     ></i>
                   </div>
                 </div>
@@ -167,7 +168,7 @@
         </section>
 
         <!-- Tab section -->
-        <section class="tab-section">
+        <section id="tab" class="tab-section">
           <div id="action-tab" class="container">
             <!-- Filter tab -->
             <!-- Populer, Newest, Top rated -->
@@ -241,10 +242,10 @@
           </div>
         </section>
 
-        <section class="list-grid">
+        <section id="movie-list">
           <div class="container" id="grid-view">
             <!-- Video list item -->
-            <!-- <div class="video-list-item">
+            <!-- <div class="video-list-item hover">
               <div class="gradient-overlay video-list-item-overlay">
                 <div class="video-list-item-top">
                   <i class='bx bx-heart hover-icon medium-icon'></i>
@@ -259,8 +260,47 @@
               </div>
             </div> -->
           </div>
+          <div id="no-grid-data-found">
+            <h4>No movie found with such category in this page</h4>
+            <h5 class="medium-font-size">Go to next or previous page</h5>
+          </div>
+          <!-- <progress></progress> -->
+        </section>
+        <section id="gridMoviePagerSection">
+          <h4 id="pager-text">1</h4>
+          <div id="pager-bg">
+            <button id="prevPage"><a href="#tab"></a><i class='bx bx-left-arrow-alt medium-icon relative-btn light-hover inactive'></i></a></button>
+            <button id="nextPage"><a href="#tab"><i class='bx bx-right-arrow-alt medium-icon relative-btn light-hover'></i></a></button>
+          </div>
+        </section>
+        <hr>
+        <section id="category-list-section">
+          <h3 id="category-list-head">All Categories</h3>
+          <div id="category-list-grid-view">
+            <!-- <div class="category-list-item" style="background-image: url(./resourses/images/genre-images/action.jpg);">
+              <h4 class="category-list-item-name">Action</h4>
+            </div> -->
+          </div>
         </section>
       </div>
     </main>
+    <footer>
+      <div id="footer-container" class="container">
+        <div id="footer-text">
+          <h4 id="copyright">&copy; All rights reserved</h4>
+          <h4 id="documents">
+            <span class="footer-links">Terms and condition</span>
+            &bull;
+            <span class="footer-links">Privacy policy</span>
+          </h4>
+        </div>
+        <div id="footer-social-media-container">
+          <a href="https://facebook.com/codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-facebook'></i></a>
+          <a href="https://instagram.com/codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-instagram'></i></a>
+          <a href="https://twitter.com/codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-twitter'></i></a>
+          <a href="https://youtube.com/@codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-youtube'></i></a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

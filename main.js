@@ -1,6 +1,14 @@
 "use strict";
 
-import { UPCOMING_MOVIES_URL, imageBaseUrl } from "./scripts/movie-confg.js";
+import {
+  UPCOMING_MOVIES_URL,
+  imageBaseUrl,
+  nextPage,
+  popularPage,
+  topRatedPage,
+  trendingPage,
+  upcomingPage,
+} from "./scripts/movie-confg.js";
 import {
   TRENDING_MOVIES,
   POPULAR_MOVIES,
@@ -10,6 +18,7 @@ import {
   getData,
   UPCOMING_MOVIES,
 } from "./scripts/movie-data.js";
+import { totalPagesList } from "./scripts/movie-request.js";
 
 /* ------------------------------ *\
   // Variable declearation
@@ -29,8 +38,17 @@ const bannerMovieInfoBtn = document.querySelector(".banner-hover");
 const categoryDropdownBtn = document.querySelector(".category-dropdown");
 const categoryDropdown = document.querySelector(".category-dd-list");
 
+const nextMovieData = document.getElementById("nextPage");
+const prevMovieData = document.getElementById("prevPage");
+
 let dropdownCategoryFilter = "All categories";
 let gridMovieUrl = POPULAR_MOVIES;
+
+let tabPos = document.querySelector(
+  "input[name='filter']:checked"
+).value;
+let paging = false;
+let page;
 
 // console.log(bannerMovieInfoBtn);
 
@@ -49,9 +67,13 @@ export function onNotifyFetchListeners() {
   setCategory();
   displayGridMovie(gridMovieUrl, dropdownCategoryFilter);
   (() => {
-    document.getElementById("loading").classList.toggle("stop");
+    document.getElementById("loading").classList.add("stop");
   })();
   displayCategories();
+  if (paging) {
+    paging = false;
+    console.log("Refreshed ");
+  }
   // This function is called to display banner movies data
   // The next line of code is called to set the switch tab according
   // to the selected tab before the movie does
@@ -89,8 +111,35 @@ categoryDropdownBtn.addEventListener("click", () => {
 });
 
 /* ------------------------------ *\
+  //Next and previous functions
+\* ------------------------------ */
+
+nextMovieData.addEventListener("click", async () => {
+  nextPage(tabPos, true);
+  paging = true;
+  console.log("next page" + page);
+  await getData();
+});
+
+/* ------------------------------ *\
   //Custom functions
 \* ------------------------------ */
+// function pagingAction() {
+//   switch (tabPos) {
+//     case "popular":
+//       popularPage = 2;
+//       break;
+//     case "upcoming":
+//       upcomingPage++;
+//       break;
+//     case "toprated":
+//       topRatedPage++;
+//       break;
+//     default:
+//       popularPage++;
+//       break;
+//   }
+// }
 
 function toggleHamburger() {
   if (navBtn.className === "bx bx-menu large-icon") {
@@ -136,13 +185,14 @@ function toggleBannerInfo() {
 \* ------------------------------ */
 
 function displayBannerMovie(list) {
-  list.forEach((item) => {
-    // console.log(item + 'list');
-    const i = pickRandom(0, item.length);
-    const bannerPost = document.getElementById("banner");
-    bannerPost.innerHTML = ``;
+  if (!paging) {
+    list.forEach((item) => {
+      // console.log(item + 'list');
+      const i = pickRandom(0, item.length);
+      const bannerPost = document.getElementById("banner");
+      bannerPost.innerHTML = ``;
 
-    bannerPost.innerHTML += `<div
+      bannerPost.innerHTML += `<div
     class="banner" loading="lazy"
     style="background-image: url(${imageBaseUrl + item[i].backdrop_path})"
   >
@@ -194,11 +244,12 @@ function displayBannerMovie(list) {
       </h3>
     </div>
   </div>`;
-  });
-  bannerMovieInfoBtn.addEventListener("click", () => {
-    console.log("pressed");
-    toggleBannerInfo();
-  });
+    });
+    bannerMovieInfoBtn.addEventListener("click", () => {
+      console.log("pressed");
+      toggleBannerInfo();
+    });
+  }
 }
 
 /* ------------------------------ *\
@@ -215,7 +266,7 @@ function displayGridMovie(data, filter) {
     for (let i = 0; i < item.length; i++) {
       // const randomCategory = getCategory(item[i].genre_ids[pickRandom(0, item[i].genre_ids.length - 1)]);
 
-      let placeHolderInnerHTML = `<div class="video-list-item" style="background-image: url(${
+      let placeHolderInnerHTML = `<div class="video-list-item light-hover" style="background-image: url(${
         imageBaseUrl + item[i].poster_path
       });">
         <div class="gradient-overlay video-list-item-overlay">
@@ -243,6 +294,13 @@ function displayGridMovie(data, filter) {
             // if movie item has specified genre in it then render it
             placeHolder.innerHTML += placeHolderInnerHTML;
           }
+          if (genre_category === item[i].genre_ids.length - 1) {
+            if (placeHolder.childNodes.length === 0) {
+              document
+                .getElementById("no-grid-data-found")
+                .classList.add("active");
+            }
+          }
         }
       } else {
         placeHolder.innerHTML += placeHolderInnerHTML;
@@ -251,11 +309,13 @@ function displayGridMovie(data, filter) {
   });
 }
 
-function displayCategories(forDropdown) {
-  const categoryForm = document.getElementById("category-dd-form");
-  for (let i = 0; i < GENRES[0].length; i++) {
-    // Create category drop down
-    categoryForm.innerHTML += `<div class="cdd-item">
+function displayCategories() {
+  if (!paging) {
+    const categoryForm = document.getElementById("category-dd-form");
+    const categoryListGrid = document.getElementById("category-list-grid-view");
+    for (let i = 0; i < GENRES[0].length; i++) {
+      // Create category drop down
+      categoryForm.innerHTML += `<div class="cdd-item">
     <input
     type="radio"
     name="category"
@@ -267,33 +327,46 @@ function displayCategories(forDropdown) {
       >${GENRES[0][i].name} <i class="bx bx-check"></i
     ></label>
   </div>`;
-    if (i === GENRES[0].length - 1) {
-      let ddSelectedAction = () => {
-        dropdownCategoryFilter = document.querySelector(
-          "input[name='category']:checked"
-        ).value;
-        console.log(dropdownCategoryFilter);
-        setCategory();
-        (() => {
-          document.querySelector(".genres-tab").innerHTML = `${dropdownCategoryFilter} <i class="bx bx-chevron-down normal-icon"></i>`;
-          categoryDropdown.classList.toggle("active");
-          displayGridMovie(gridMovieUrl, dropdownCategoryFilter)
-        })();
 
-        // with this we can listen to the dropdown if any other
-        // is selected
-        // Get the label in a variable to add click event later
-        // Get all the radio in a variable so we can loop through
-        // them and find the value of the checked category dropdown
-        // When item in dropdown is clicked, call the category
-        // function to refresh data in the gridview based on
-        // the tab its currently in
-      };
+      categoryListGrid.innerHTML += `<div class="category-list-item hover" style="background-image: url(./resourses/images/genre-images/${GENRES[0][
+        i
+      ].name
+        .toLowerCase()
+        .replace(" ", "-")}.jpg);">
+    <h4 class="category-list-item-name">${GENRES[0][i].name}</h4>
+  </div>`;
+      if (i === GENRES[0].length - 1) {
+        let ddSelectedAction = () => {
+          dropdownCategoryFilter = document.querySelector(
+            "input[name='category']:checked"
+          ).value;
+          console.log(dropdownCategoryFilter);
+          setCategory();
+          (() => {
+            document.querySelector(
+              ".genres-tab"
+            ).innerHTML = `${dropdownCategoryFilter} <i class="bx bx-chevron-down normal-icon"></i>`;
+            categoryDropdown.classList.toggle("active");
+            displayGridMovie(gridMovieUrl, dropdownCategoryFilter);
+          })();
 
-      let ddCategoryRadio = document.querySelectorAll("input[name='category']");
-      ddCategoryRadio.forEach((selection) => {
-        selection.addEventListener("change", ddSelectedAction);
-      });
+          // with this we can listen to the dropdown if any other
+          // is selected
+          // Get the label in a variable to add click event later
+          // Get all the radio in a variable so we can loop through
+          // them and find the value of the checked category dropdown
+          // When item in dropdown is clicked, call the category
+          // function to refresh data in the gridview based on
+          // the tab its currently in
+        };
+
+        let ddCategoryRadio = document.querySelectorAll(
+          "input[name='category']"
+        );
+        ddCategoryRadio.forEach((selection) => {
+          selection.addEventListener("change", ddSelectedAction);
+        });
+      }
     }
   }
 }
@@ -312,33 +385,45 @@ function pickRandom(min, max) {
 \* ------------------------------ */
 
 function setCategory() {
+  const pagerText = document.getElementById("pager-text");
   let categoryRadio = document.querySelectorAll("input[name='filter']");
+  // selectedFilter;
 
   let selectedFilter = () => {
     let selectedFilterValue = document.querySelector(
       "input[name='filter']:checked"
     ).value;
+    tabPos = selectedFilterValue;
 
     gridMovieUrl = "";
 
     switch (selectedFilterValue) {
       case "popular":
         gridMovieUrl = POPULAR_MOVIES;
+        page = popularPage;
+        pagerText.innerHTML = `${page} of ${totalPagesList[1]}`;
+
         // displayGridMovie(POPULAR_MOVIES, dropdownCategoryFilter);
         break;
 
       case "upcoming":
         gridMovieUrl = UPCOMING_MOVIES;
+        page = upcomingPage;
+        pagerText.innerHTML = `${page} of ${totalPagesList[2]}`;
         // displayGridMovie(UPCOMING_MOVIES, dropdownCategoryFilter);
         break;
 
       case "toprated":
         gridMovieUrl = TOP_RATED_MOVIES;
+        page = topRatedPage;
+        pagerText.innerHTML = `${page} of ${totalPagesList[3]}`;
         // displayGridMovie(TOP_RATED_MOVIES, dropdownCategoryFilter);
         break;
 
       default:
         gridMovieUrl = POPULAR_MOVIES;
+        page = popularPage;
+        pagerText.innerHTML = `${page} of ${totalPagesList[1]}`;
         // displayGridMovie(POPULAR_MOVIES, dropdownCategoryFilter);
         break;
     }
@@ -349,6 +434,8 @@ function setCategory() {
   categoryRadio.forEach((category) => {
     category.addEventListener("change", selectedFilter);
   });
+
+  selectedFilter();
 }
 
 /* ------------------------------ *\

@@ -10,6 +10,8 @@ import {
 } from "./movie-confg.js";
 import { parseData } from "./movie-data.js";
 
+// This urls must be in this order to avoid mismap is incorrect
+// pages
 const URLS = [
   fetch(TRENDING_MOVIES_URL),
   fetch(POPULAR_MOVIES_URL),
@@ -19,8 +21,8 @@ const URLS = [
   fetch(LATEST_MOVIES_URL),
 ];
 
+export const totalPagesList = [];
 export async function request() {
-    
   try {
     const fetchedData = [];
     await Promise.allSettled(URLS).then((res) =>
@@ -32,21 +34,26 @@ export async function request() {
     );
     const list = [];
     const dataList = await Promise.all(fetchedData.map((item) => item.json()));
-      dataList.forEach(element => {
-        // console.log(element.hasOwnProperty("results"));
-        if("results" in element){
-          list.push(element.results)
-        }else if("genres" in element){
-          list.push(element.genres)
+    dataList.forEach((element) => {
+      // console.log(element.hasOwnProperty("results"));
+      if(totalPagesList.length !== 4){
+        if("total_pages" in element){
+          totalPagesList.push(element.total_pages);
         }else{
-          list.push(element);
+          totalPagesList.push(0);
         }
-        // console.log(list);
-      });
+      }
+      if ("results" in element) {
+        list.push(element.results);
+      } else if ("genres" in element) {
+        list.push(element.genres);
+      } else {
+        list.push(element);
+      }
+      // console.log(list);
+    });
 
-    // console.log(list);
+    console.log(totalPagesList);
     parseData(list);
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 }

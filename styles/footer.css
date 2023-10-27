@@ -1,0 +1,70 @@
+@import url(./styles/variables.css);
+
+footer {
+    width: 100%;
+    background: var(--secondary-bg-color);
+    padding: 1rem;
+}
+
+#footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#footer-social-media-container {
+    display: flex;
+}
+
+#footer-text {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+#footer-social-media-icon {
+    margin: 0 .5rem;
+    font-size: 1.2rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--card-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#footer-social-media-icon:hover {
+    background-color: var(--primary-color);
+}
+
+#footer-document{
+    font-size: var(--large-font-size);
+}
+
+.footer-links, #copyright {
+    color: var(--text-color);
+}
+
+.footer-links:hover {
+    color: var(--primary-color);
+}
+
+@media screen and (max-width: 700px) {
+    /*-==========- Mini-tablets screens -==========*/
+  
+    #footer-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        gap: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    /*-==========- Mini-tablets screens -==========*/
+  
+    #footer-text {
+        flex-direction: column-reverse;
+    }
+  }
