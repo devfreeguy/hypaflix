@@ -2,7 +2,6 @@
     #Import styles
 */
 
-@import url(./styles/variables.css);
 @import url(./styles/header.css);
 @import url(./styles/footer.css);
 @import url(./styles/general.css);
@@ -15,17 +14,7 @@
   justify-content: center;
 } */
 
-.container {
-  width: var(--desktop-container);
-  margin: 0 auto;
-}
 
-.gradient-overlay {
-  width: 100%;
-  border-radius: var(--border-radius);
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, black);
-}
 
 /* ------------ */
 
@@ -169,7 +158,7 @@
 
 .banner:hover {
   transform: scale(0.99);
-  background-size: 101%;
+  /* background-size: 101%; */
 }
 
 .banner:hover .banner-hover {

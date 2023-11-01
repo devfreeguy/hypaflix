@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign in - Hypaflix</title>
+    <title>Hypaflix - Sign in</title>
 
     <!-- Link favicon -->
     <link
@@ -24,12 +24,123 @@
     <!-- Link styles -->
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../styles/general.css" />
+    <link rel="stylesheet" href="../styles/auth.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     />
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/auth.js" defer></script>
+    <script type="module" src="../scripts/firebase-confg.js" defer></script>
   </head>
   <body>
-     <div id="main"></div>
+    <main>
+      <div id="loginPanel" class="panel active">
+        <form onsubmit="login(event)" id="loginForm">
+          <h1 id="loginTitleText" class="top-text">Login</h1>
+          <input
+            type="email"
+            name="loginEmail"
+            id="loginEmail"
+            placeholder="Email address"
+            required
+          />
+          <input
+            type="password"
+            name="loginPassword"
+            id="loginPassword"
+            placeholder="Password"
+            required
+          />
+          <div id="rememberBg">
+            <input type="checkbox" name="remember" id="remember" />
+            <!-- <i class="bx bxs-checkbox" id="checkbox-icon"></i> -->
+            <label for="remember"> <h4>Remember me</h4> </label>
+          </div>
+          <button type="submit" id="loginButton" class="btn">
+            Submit
+          </button>
+          <h4 id="recover">Recover my account</h4>
+        </form>
+      </div>
+      <div id="infoPanel" class="panel">
+        <img
+          src="../resourses/images/movie-poster-collage.jpg"
+          class="info-layer"
+          id="infoImage"
+        />
+        <div id="infoBg" class="info-layer">
+          <div id="infoPanelContainer">
+            <h1 id="infoTopText">Welcome back</h1>
+            <p id="infoText" class="large-font-size">
+              We are glad to have you back, enter your email and password to log
+              into your account and let's have fun. Click the signup button to
+              create a new account and let's join the fun, don't miss it!!!
+            </p>
+            <button id="switchButton">
+              <h4 id="switchButtonText">Sign up</h4>
+              <i class="bx bx-log-in-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="signupPanel" class="panel">
+        <form onsubmit="signup(event)" id="signupForm">
+          <h1 id="signupTitleText" class="top-text">Signup</h1>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Fullname"
+            required
+          />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="email"
+            name="signupEmail"
+            id="signupEmail"
+            placeholder="Email address"
+            required
+          />
+          <input
+            type="password"
+            name="signupPassword"
+            id="signupPassword"
+            placeholder="Password"
+            required
+          />
+          <button type="submit" id="signupButton" class="btn">
+            Submit
+          </button>
+        </form>
+      </div>
+    </main>
+    <section id="recoverSection">
+      <div id="recoverBg" class="panel">
+        <div id="recoverBgTop">
+          <h3>Recover your Account</h3>
+          <i class="bx bx-x"></i>
+        </div>
+        <form onsubmit="recover(event)" id="recoverForm">
+          <div>
+            <input
+              type="email"
+              name="recoveryEmail"
+              id="recoveryEmail"
+              placeholder="Email address"
+              required
+            />
+            <button type="submit" class="btn" id="recoverButton">Submit</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </body>
 </html>

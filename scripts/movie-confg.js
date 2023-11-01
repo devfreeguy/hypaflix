@@ -27,12 +27,11 @@ export function nextPage(name, action) {
   console.log(name);
   switch (name) {
     case "popular":
-      if(action){popularPage++;}else{popularPage--;}
-      console.log(popularPage);
+      action ? popularPage++ : popularPage--;
+      console.log(POPULAR_MOVIES_URL);
       break;
-      case "upcoming":
-        action ? upcomingPage++ : upcomingPage--;
-        console.log(upcomingPage);
+    case "upcoming":
+      action ? upcomingPage++ : upcomingPage--;
       break;
     case "toprated":
       action ? topRatedPage++ : topRatedPage--;
