@@ -34,35 +34,49 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
+var usersdata = firebase.database().ref("usersdata");
 
-window.signup = function (e) {
-  e.preventDefault();
-  let firstName;
-  let lastName;
-  (() => {
-    if (name.value.includes(" ")) {
-      firstName = name.value.split(" ").slice(0, -1).join(" ");
-      lastName = name.value.split(" ").slice(-1).join(" ");
-    } else {
-      firstName = name.value;
-      lastName = "";
-    }
-  })();
+let firstName = name.value;
+let lastName = "";
+(() => {
+  if (name.value.includes(" ")) {
+    firstName = name.value.split(" ").slice(0, -1).join(" ");
+    lastName = name.value.split(" ").slice(-1).join(" ");
+  }
+})();
 
-  var obj = {
-    firstname: firstName,
-    lastname: lastName,
-    email: signupEmail.value,
-    password: signupPassword.value,
-  };
-
-  createUserWithEmailAndPassword(auth, obj.email, obj.password)
-    .then(function (success) {
-      alert(`Signup successful, you are welcome ${firstName}`);
-    })
-    .catch(function (err) {
-      alert(`An error occured ${err}`);
-    });
-
-  console.log(obj);
+var userdata = {
+  name: name,
+  username: username,
+  email: signupEmail.value,
+  password: signupPassword.value,
 };
+
+export function signup() {
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(userdata.email, userdata.password)
+    .then(function () {})
+    .catch(function (error) {
+      alert(`Signup failed \n ${error.message} \n ${error.code}`);
+    });
+}
+
+export function signin(email, password) {
+  const promise = auth().createUserWithEmailAndPassword(
+    email !== "" ? email : loginEmail,
+    password !== "" ? password : loginPassword
+  );
+  promise.catch((e) => alert(e.msg));
+  window.open("https//www.google.com", "_self");
+}
+
+export function addUser() {
+  usersdata.push().set(data);
+  alert("User added successfully");
+  signin(signupEmail, signupPassword);
+}
+
+export function recoverUser(){
+  
+}

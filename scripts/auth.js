@@ -1,5 +1,7 @@
 "use strict";
 
+import { addUser, signin, signup } from "./firebase-confg";
+
 const modeSwitch = document.getElementById("switchButton");
 const switchText = document.getElementById("switchButtonText");
 const infoPanel = document.getElementById("infoPanel");
@@ -8,6 +10,7 @@ const signupPanel = document.getElementById("signupPanel");
 const infoTopText = document.getElementById("infoTopText");
 const infoText = document.getElementById("infoText");
 modeSwitch.addEventListener("click", () => {
+  console.log("switching");
   (() => {
     loginPanel.classList.toggle("active");
     infoPanel.classList.toggle("active");
@@ -36,3 +39,35 @@ export var loginPassword = document.getElementById("loginPassword");
 export var signupPassword = document.getElementById("signupPassword");
 export var username = document.getElementById("username");
 export var name = document.getElementById("name");
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
+const recoverForm = document.getElementById("recoverForm");
+
+loginForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  console.log("signing in");
+  signin();
+})
+
+signupForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  console.log("signing up");
+  signup();
+})
+
+recoverForm.addEventListener("submit", (e)=>{
+  e.preventDefault();
+  console.log("Recovering account");
+  recoverForm();
+})
+
+
+const recoveryAccountBtn = document.getElementById("recover");
+const closeRecoveryBtn = document.getElementById("closeRecovery");
+const recoverySection = document.getElementById("recoverSection");
+recoveryAccountBtn.addEventListener("click", ()=>{
+  recoverySection.classList.add("active");
+});
+closeRecoveryBtn.addEventListener("click", ()=>{
+  recoverySection.classList.remove("active");
+});

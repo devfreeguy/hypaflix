@@ -32,12 +32,12 @@
 
     <!-- Scripts -->
     <script type="module" src="../scripts/auth.js" defer></script>
-    <script type="module" src="../scripts/firebase-confg.js" defer></script>
+    <!-- <script type="module" src="../scripts/firebase-confg.js" defer></script> -->
   </head>
   <body>
     <main>
       <div id="loginPanel" class="panel active">
-        <form onsubmit="login(event)" id="loginForm">
+        <form action="" id="loginForm">
           <h1 id="loginTitleText" class="top-text">Login</h1>
           <input
             type="email"
@@ -64,7 +64,7 @@
           <h4 id="recover">Recover my account</h4>
         </form>
       </div>
-      <div id="infoPanel" class="panel">
+      <div id="infoPanel" >
         <img
           src="../resourses/images/movie-poster-collage.jpg"
           class="info-layer"
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div id="signupPanel" class="panel">
-        <form onsubmit="signup(event)" id="signupForm">
+        <form action="" id="signupForm">
           <h1 id="signupTitleText" class="top-text">Signup</h1>
           <input
             type="text"
@@ -123,12 +123,13 @@
       </div>
     </main>
     <section id="recoverSection">
-      <div id="recoverBg" class="panel">
+      <div id="recoverBg">
         <div id="recoverBgTop">
           <h3>Recover your Account</h3>
-          <i class="bx bx-x"></i>
+          <i class="bx bx-x" id="closeRecovery"></i>
         </div>
-        <form onsubmit="recover(event)" id="recoverForm">
+        <span id="recoverInfoText" class="medium-font-size">Enter the email attached to your account and we'll send you a password reset link</span>
+        <form action="" id="recoverForm">
           <div>
             <input
               type="email"
