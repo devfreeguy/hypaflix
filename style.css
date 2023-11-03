@@ -102,10 +102,6 @@
   margin: 0.8rem 0;
   font-size: var(--larger-font-size);
   flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 #like-banner-movie-btn {
@@ -408,6 +404,7 @@ input[type="radio"].gone {
 .video-list-item-info {
   gap: 0.2rem;
   width: 100%;
+  margin-bottom: .8rem;
 }
 
 .video-list-item-overlay {

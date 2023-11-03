@@ -24,7 +24,7 @@
 
     <!-- Link styles -->
     <link rel="stylesheet" href="./styles/general.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
@@ -37,7 +37,7 @@
       src="https://unpkg.com/ionicons@latest/dist/ionicons.js"
       defer
     ></script>
-    <script type="module" src="./scripts/general.js"></script>
+    <script type="module" src="./scripts/header.js" defer></script>
     <script type="module" src="main.js" defer></script>
   </head>
 
@@ -46,7 +46,7 @@
   ------------------------------>
 
   <body>
-    <div id="loading">
+    <div id="splashScreen">
       <img src="./resourses/images/logo.png" download="false" />
     </div>
     <!-- Header -->
@@ -95,21 +95,65 @@
           </div>
           <!-- Account holder -->
           <div id="account-holder">
-            <a href="./pages/auth.html">
-              <div class="sign-in-btn">
-              <span class="sign-in-btn-text" readonly
-                >Sign in</span
-              >
-              <!-- Sign in icon -->
-              <i
-                class="bx bx-log-in-circle sign-in-btn-text medium-icon"
-                id=""
-              ></i>
-            </div>
-            </a>
-            <a href="#">
-              <img src="./resourses/images/genre-images/science-fiction.jpg" id="profile-picture">
-            </a>
+            <span>
+              <a href="./pages/auth.html">
+                <div class="sign-in-btn" id="signInBtn">
+                  <span class="sign-in-btn-text" readonly>Sign in</span>
+                  <!-- Sign in icon -->
+                  <i
+                    class="bx bx-log-in-circle sign-in-btn-text medium-icon"
+                    id=""
+                  ></i>
+                </div>
+              </a>
+              <i class='bx bxs-user' id="profile"></i>
+              <!-- <img src="./resourses/images/profile.png" /> -->
+            </span>
+
+            <!-- Profile card -->
+
+            <section id="profile-section">
+              <div id="profile-bg" class="container">
+                <div id="profile-body">
+                  <div id="top-profile-info-holder">
+                    <!-- TODO: instead of having a profile picture here,
+                      why don't we have account level tier barge -->
+                    <img
+                      src="./resourses/images/tier1.png"
+                      id="level-picture"
+                    />
+                    <div id="profile-info-holder">
+                      <span
+                        id="username"
+                        class="large-font-size single-line-text"
+                        >@username</span
+                      >
+                      <span
+                        id="useremail"
+                        class="medium-font-size single-line-text"
+                        >name@yourwebsite.com</span
+                      >
+                    </div>
+                    <i class="bx bx-x close-btn" id="closeProfile"></i>
+                  </div>
+                  <span id="pointBg"
+                    ><span
+                      ><span class="large-font-size">HAPoints:</span>
+                      <h3 id="apoint"></h3></span
+                    ><i class="bx bx-cart-add relative-btn" id="buyPoints"></i
+                  ></span>
+                </div>
+
+                <div id="bottom-profile-button-holder">
+                  <button id="editProfileBtn" class="relative-btn light-hover">
+                    Edit profile
+                  </button>
+                  <button id="signoutBtn" class="btn light-hover">
+                    Sign out
+                  </button>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -141,16 +185,16 @@
                   >
                 </div>
                 <div class="banner-title-action">
-                  <h3 id="movie-title">Movie title</h3>
+                  <h3 id="movie-title" class="single-line-text">Movie title</h3>
                   <div class="banner-action">
                     <button id="watch-banner-movie-btn" class="btn hover">
-                      Watch later
+                      Watch now
                     </button>
-                    <button id="like-banner-movie-btn">
-                      <i
-                      class="bx bx-heart medium-icon hover"
-                      
-                    ></i>
+                    <button
+                      id="like-banner-movie-btn"
+                      class="relative-btn hover"
+                    >
+                      <i class="bx bx-heart medium-icon hover"></i>
                     </button>
                   </div>
                 </div>
@@ -227,24 +271,23 @@
                   All categories <i class="bx bx-chevron-down normal-icon"></i>
                 </h4>
               </div>
-                <div class="category-dd-list">
-                  <form action="#" id="category-dd-form">
-                    <div class="cdd-item">
-                      <input
-                        type="radio"
-                        name="category"
-                        id="all"
-                        value="All categories"
-                        class="gone"
-                        checked
-                      />
-                      <label for="all" class="medium-font-size"
-                        >All categories <i class="bx bx-check"></i
-                      ></label>
-                    </div>
-                    
-                  </form>
-                </div>
+              <div class="category-dd-list">
+                <form action="#" id="category-dd-form">
+                  <div class="cdd-item">
+                    <input
+                      type="radio"
+                      name="category"
+                      id="all"
+                      value="All categories"
+                      class="gone"
+                      checked
+                    />
+                    <label for="all" class="medium-font-size"
+                      >All categories <i class="bx bx-check"></i
+                    ></label>
+                  </div>
+                </form>
+              </div>
             </section>
           </div>
         </section>
@@ -276,11 +319,23 @@
         <section id="gridMoviePagerSection">
           <h4 id="pager-text">1</h4>
           <div id="pager-bg">
-            <button id="prevPage"><a href="#tab"></a><i class='bx bx-left-arrow-alt medium-icon relative-btn light-hover inactive'></i></a></button>
-            <button id="nextPage"><a href="#tab"><i class='bx bx-right-arrow-alt medium-icon relative-btn light-hover'></i></a></button>
+            <button id="prevPage">
+              <a href="#tab"
+                ><i
+                  class="bx bx-left-arrow-alt medium-icon relative-btn light-hover inactive"
+                ></i
+              ></a>
+            </button>
+            <button id="nextPage">
+              <a href="#tab"
+                ><i
+                  class="bx bx-right-arrow-alt medium-icon relative-btn light-hover"
+                ></i
+              ></a>
+            </button>
           </div>
         </section>
-        <hr>
+        <hr />
         <section id="category-list-section">
           <h3 id="category-list-head">All Categories</h3>
           <div id="category-list-grid-view">
@@ -302,10 +357,18 @@
           </h4>
         </div>
         <div id="footer-social-media-container">
-          <a href="https://facebook.com/codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-facebook'></i></a>
-          <a href="https://instagram.com/codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-instagram'></i></a>
-          <a href="https://twitter.com/codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-twitter'></i></a>
-          <a href="https://youtube.com/@codeybrains" target="_blank"><i id="footer-social-media-icon" class='bx bxl-youtube'></i></a>
+          <a href="https://facebook.com/codeybrains" target="_blank"
+            ><i id="footer-social-media-icon" class="bx bxl-facebook"></i
+          ></a>
+          <a href="https://instagram.com/codeybrains" target="_blank"
+            ><i id="footer-social-media-icon" class="bx bxl-instagram"></i
+          ></a>
+          <a href="https://twitter.com/codeybrains" target="_blank"
+            ><i id="footer-social-media-icon" class="bx bxl-twitter"></i
+          ></a>
+          <a href="https://youtube.com/@codeybrains" target="_blank"
+            ><i id="footer-social-media-icon" class="bx bxl-youtube"></i
+          ></a>
         </div>
       </div>
     </footer>

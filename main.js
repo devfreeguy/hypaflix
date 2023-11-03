@@ -1,5 +1,7 @@
 "use strict";
 
+import { pickRandom } from "./scripts/general.js";
+import { getProfileData, toggleHamburger } from "./scripts/header.js";
 import {
   UPCOMING_MOVIES_URL,
   imageBaseUrl,
@@ -24,13 +26,8 @@ import { totalPagesList } from "./scripts/movie-request.js";
   // Variable declearation
 \* ------------------------------ */
 
-const navBtn = document.getElementById("nav-icon");
-const nav = document.getElementById("nav");
-
-const searchBtn = document.querySelector(".search-btn");
-const searchBar = document.querySelector(".search-bar");
-const searchBox = document.querySelector(".search-box");
-const searchIcon = document.querySelector(".search-icon");
+const UserInfo = sessionStorage.getItem("userinfo");
+const UsersData = sessionStorage.getItem("usersdata");
 
 const categoryDropdownBtn = document.querySelector(".category-dropdown");
 const categoryDropdown = document.querySelector(".category-dd-list");
@@ -78,24 +75,6 @@ export function onNotifyFetchListeners() {
 }
 
 /* ------------------------------ *\
-  //Navigation functions
-  // Navigation bar toogle function
-\* ------------------------------ */
-
-navBtn.addEventListener("click", () => {
-  // console.log("pressed");
-  toggleHamburger();
-});
-
-/* ------------------------------ *\
-  //Search functions
-\* ------------------------------ */
-
-searchBtn.addEventListener("click", () => {
-  console.log("pressed");
-});
-
-/* ------------------------------ *\
   //Search functions
 \* ------------------------------ */
 
@@ -104,6 +83,14 @@ categoryDropdownBtn.addEventListener("click", () => {
     categoryDropdown.classList.toggle("active");
   })();
 });
+
+/* ------------------------------ *\
+  //Check if user is loggedin
+\* ------------------------------ */
+
+if (!UserInfo && !UsersData) {
+  getProfileData(JSON.parse(UserInfo));
+}
 
 /* ------------------------------ *\
   //Next and previous functions
@@ -134,28 +121,6 @@ nextMovieData.addEventListener("click", async () => {
 //       break;
 //   }
 // }
-
-function toggleHamburger() {
-  if (navBtn.className === "bx bx-menu large-icon") {
-    navBtn.className = "bx bx-arrow-from-bottom large-icon";
-  } else {
-    navBtn.className = "bx bx-menu large-icon";
-  }
-
-  // What this does is that it keeps the navigation bar closed or open
-  // Basically, this helps with the sliding animation
-  if (nav.className === "active") {
-    (() => {
-      nav.classList.remove("active");
-      nav.classList.toggle("inactive");
-    })();
-  } else {
-    (() => {
-      nav.classList.remove("inactive");
-      nav.classList.toggle("active");
-    })();
-  }
-}
 
 /* ------------------------------ *\
   //Display banner movie item functions
@@ -192,7 +157,7 @@ function displayBannerMovie(list) {
           >
         </div>
         <div class="banner-title-action">
-          <h3 id="movie-title">${item[i].title}</h3>
+          <h3 id="movie-title" class="single-line-text">${item[i].title}</h3>
           <div class="banner-action">
             <button class="medium-btn banner-btn-hover" id="banner-btn">
               Watch later
@@ -248,7 +213,6 @@ function displayBannerMovie(list) {
         console.log("Now hidden");
         // bannerMovieInfo.style.display = "none";
       }
-      
     }
   }
 }
@@ -370,15 +334,6 @@ function displayCategories() {
       }
     }
   }
-}
-
-/* ------------------------------ *\
-  //Pick random functions
-\* ------------------------------ */
-
-function pickRandom(min, max) {
-  // console.log(Math.random() * to);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /* ------------------------------ *\

@@ -1,10 +1,5 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+"use strict";
+
 import {
   loginEmail,
   loginPassword,
@@ -12,8 +7,25 @@ import {
   signupPassword,
   recoveryEmail,
   username,
-  name,
-} from "./auth";
+  loading,
+  switchModes,
+} from "./auth.js";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-analytics.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+import {
+  getDatabase,
+  get,
+  set,
+  ref,
+  child,
+} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,50 +45,89 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth();
-var usersdata = firebase.database().ref("usersdata");
+const db = getDatabase();
+const auth = getAuth(app);
+const dbref = ref(db);
 
-let firstName = name.value;
-let lastName = "";
-(() => {
-  if (name.value.includes(" ")) {
-    firstName = name.value.split(" ").slice(0, -1).join(" ");
-    lastName = name.value.split(" ").slice(-1).join(" ");
-  }
-})();
+export let RegisterUser = (re) => {
+  re.preventDefault();
 
-var userdata = {
-  name: name,
-  username: username,
-  email: signupEmail.value,
-  password: signupPassword.value,
+  console.log("Registering...");
+  createUserWithEmailAndPassword(auth, signupEmail.value, signupPassword.value)
+    .then((data) => {
+      set(ref(db, "usersdata/" + data.user.uid), {
+        username: username.value,
+        email: signupEmail.value,
+        access_point: 100,
+        account_level: 1,
+        account_type: "user",
+      });
+      loading(false);
+      alert(
+        `Hurray!!!\n\n\nYour registration was successful, you can proceed to loging into your new account`
+      );
+      switchModes();
+    })
+    .catch((er) => {
+      loading(false);
+      alert(`Signup failed\n${er.message}\n${er.code}`);
+    });
 };
 
-export function signup() {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(userdata.email, userdata.password)
-    .then(function () {})
-    .catch(function (error) {
-      alert(`Signup failed \n ${error.message} \n ${error.code}`);
+export let signinUser = (se) => {
+  se.preventDefault();
+
+  console.log("Signing in...");
+  signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+    .then((data) => {
+      get(child(db, "usersdata/" + data.user.uid)).then((snapshot) => {
+        if (snapshot.exists) {
+          sessionStorage.setItem(
+            "userinfo",
+            JSON.stringify({
+              email: snapshot.val().email,
+              username: snapshot.val().username,
+              access_point: snapshot.val().access_point,
+              account_level: snapshot.val().account_level,
+            })
+          );
+          sessionStorage.setItem("usersdata", JSON.stringify(data.user));
+          window.location.href = "./index.html";
+        }
+      });
+      loading(false);
+      console.log(data);
+    })
+    .catch((err) => {
+      loading(false);
+      alert(`Signin failed\n${err.message}\n${err.code}`);
     });
+};
+
+export function signoutUser() {
+  sessionStorage.removeItem("usersdata");
+  sessionStorage.removeItem("userinfo");
+  window.location.href = "./index.html";
+  console.log("sign out successful");
 }
 
-export function signin(email, password) {
-  const promise = auth().createUserWithEmailAndPassword(
-    email !== "" ? email : loginEmail,
-    password !== "" ? password : loginPassword
-  );
-  promise.catch((e) => alert(e.msg));
-  window.open("https//www.google.com", "_self");
-}
+// function signin() {
+//   loading(true);
+//   console.log("Signing in");
+//   const promise = auth().createUserWithEmailAndPassword(
+//     loginEmail.value,
+//     loginPassword.value
+//   );
+//   promise.catch((e) => alert(e.msg));
+//   window.open("https//www.google.com", "_self");
+// }
 
-export function addUser() {
-  usersdata.push().set(data);
-  alert("User added successfully");
-  signin(signupEmail, signupPassword);
-}
+// function addUser() {
+//   loading(true);
+//   console.log("Adding user");
+//   usersdata.push().set(userdata);
+//   alert("User added successfully");
+//   signin(signupEmail, signupPassword);
+// }
 
-export function recoverUser(){
-  
-}
+// function recoverUser() {}

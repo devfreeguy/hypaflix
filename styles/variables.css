@@ -19,7 +19,7 @@ Table of context
   --accent-color: #e3f2fd;
   --color-highlight: #798086;
   /* --color-highlight: #90caf9; */
-  --normal-color: #42a5f5;
+  --normal-color: #f54242;
   /* --bg-color: #090c1d; */
   --bg-color: #0b0b0c;
   /* --bg-color: #121212; */
@@ -28,11 +28,12 @@ Table of context
   /* --card-color: #0f1115; */
   --card-color: #242428;
   --white-color: #fff;
-  --text-color: #5a6983;
-  /* --text-color: #858e9d; */
+  --text-color: #8d98ac;
+  --sub-text-color: #7b8392;
   --line-color: #2d3e5a;
   --filter-tab-bg-color: rgba(88, 115, 255, 0.3);
   --light-dark-bg-color: rgba(0, 0, 0, 0.4);
+  --darkGradientOverlay: linear-gradient(to bottom, transparent, black);
 
   /* Transitions */
   --slower-transformer: all 5s ease-in-out;

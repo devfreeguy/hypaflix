@@ -15,7 +15,7 @@
 header {
   width: 100%;
   position: fixed;
-  z-index: 100;
+  z-index: 99;
 }
 
 .header {
@@ -111,25 +111,131 @@ header {
   gap: 10px;
 }
 
+.sign-in-btn.close{
+  display: none;
+}
+
 .sign-in-btn-text,
 .search-bar,
 .search-icon {
   font-size: var(--medium-font-size);
 }
 
-#account-holder {
+#profile-section {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(10px);
+  display: none;
+  background: var(--light-dark-bg-color);
+}
+
+#profile-section.active{
+  display: flex;
+}
+
+#profile-bg {
+  position: fixed;
+  left: auto;
+  right: 0;
+  margin: var(--header-height);
+  min-width: 250px;
+  width: 80%;
+  max-width: 350px;
+  background: var(--bg-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  height: 40vh;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#closeProfile {
+  margin-bottom: auto;
+}
+
+#account-holder, #account-holder span {
   display: flex;
   align-items: center;
 }
 
-#profile-picture {
+#profile {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   height: clamp(2rem, 5vw, 2.5rem);
   width: clamp(2rem, 5vw, 2.5rem);
   object-fit: cover;
-  border-radius: 50%;
-  padding: 2px;
-  border: solid 2px var(--color-highlight);
+  border-radius: var(--button-radius);
+  background: var(--secondary-bg-color);
   display: none;
+  transition: all 200ms;
+}
+
+#profile:hover {
+  border: solid 2px var(--primary-color);
+}
+
+#profile.active {
+  display: flex;
+}
+
+#top-profile-info-holder{
+  display: flex;
+  align-items: center;
+  gap: var(--small-gap);
+}
+
+#level-picture {
+  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+}
+
+#profile-info-holder{
+  display: flex;
+  flex-direction: column;
+  gap: var(--small-gap);
+  flex-grow: 1;
+}
+
+#username{
+font-weight: 800;
+}
+
+#pointBg {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--padding);
+  margin-top: 1rem;
+}
+
+#pointBg span {
+  gap: var(--small-gap);
+}
+
+#buyPoints {
+  font-size: 1rem;
+}
+
+#bottom-profile-button-holder{
+  display: flex;
+  gap: calc(var(--small-gap) + 3px);
+}
+
+#bottom-profile-button-holder *{
+  flex-grow: 1;
 }
 
 @media screen and (max-width: 992px) {

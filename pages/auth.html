@@ -22,7 +22,6 @@
     />
 
     <!-- Link styles -->
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="../styles/general.css" />
     <link rel="stylesheet" href="../styles/auth.css" />
     <link
@@ -33,8 +32,25 @@
     <!-- Scripts -->
     <script type="module" src="../scripts/auth.js" defer></script>
     <!-- <script type="module" src="../scripts/firebase-confg.js" defer></script> -->
+
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+
+    
   </head>
   <body>
+    <div id="loading">
+      <dotlottie-player
+      src="https://lottie.host/541d7d40-287f-4509-bcff-3bc4590a1f13/Vl5Po6xucx.json"
+      background="transparent"
+      speed="1"
+      style="width: clamp(6rem, 20vw, 10rem); height: clamp(6rem, 20vw, 10rem)"
+      loop
+      autoplay
+    ></dotlottie-player>
+    </div>
     <main>
       <div id="loginPanel" class="panel active">
         <form action="" id="loginForm">
@@ -58,13 +74,25 @@
             <!-- <i class="bx bxs-checkbox" id="checkbox-icon"></i> -->
             <label for="remember"> <h4>Remember me</h4> </label>
           </div>
-          <button type="submit" id="loginButton" class="btn">
+          <button
+            type="submit"
+            id="loginButton"
+            class="btn"
+          >
             Submit
           </button>
           <h4 id="recover">Recover my account</h4>
         </form>
+
+        <div class="switchBg">
+          <h5 class="medium-font-size switchLabel">Don't have an account?</h5>
+          <button class="switchButton externalSwitch" id="">
+            <h4 class="switchButtonText">Sign up</h4>
+            <i class="bx bx-log-in-circle"></i>
+          </button>
+        </div>
       </div>
-      <div id="infoPanel" >
+      <div id="infoPanel">
         <img
           src="../resourses/images/movie-poster-collage.jpg"
           class="info-layer"
@@ -78,23 +106,16 @@
               into your account and let's have fun. Click the signup button to
               create a new account and let's join the fun, don't miss it!!!
             </p>
-            <button id="switchButton">
-              <h4 id="switchButtonText">Sign up</h4>
+            <button class="switchButton" id="infoBgSwitch">
+              <h4 class="switchButtonText">Sign up</h4>
               <i class="bx bx-log-in-circle"></i>
             </button>
           </div>
         </div>
       </div>
       <div id="signupPanel" class="panel">
-        <form action="" id="signupForm">
+        <form id="signupForm">
           <h1 id="signupTitleText" class="top-text">Signup</h1>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Fullname"
-            required
-          />
           <input
             type="text"
             name="username"
@@ -116,19 +137,33 @@
             placeholder="Password"
             required
           />
-          <button type="submit" id="signupButton" class="btn">
+          <button
+            type="submit"
+            id="signupButton"
+            class="btn"
+          >
             Submit
           </button>
         </form>
+        <div class="switchBg">
+          <h5 class="medium-font-size switchLabel">Already has an account?</h5>
+          <button class="switchButton externalSwitch" id="">
+            <h4 class="switchButtonText">Sign up</h4>
+            <i class="bx bx-log-in-circle"></i>
+          </button>
+        </div>
       </div>
     </main>
     <section id="recoverSection">
       <div id="recoverBg">
         <div id="recoverBgTop">
           <h3>Recover your Account</h3>
-          <i class="bx bx-x" id="closeRecovery"></i>
+          <i class="bx bx-x close-btn" id="closeRecovery"></i>
         </div>
-        <span id="recoverInfoText" class="medium-font-size">Enter the email attached to your account and we'll send you a password reset link</span>
+        <span id="recoverInfoText" class="medium-font-size"
+          >Enter the email attached to your account and we'll send you a
+          password reset link</span
+        >
         <form action="" id="recoverForm">
           <div>
             <input

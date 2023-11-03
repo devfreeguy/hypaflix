@@ -7,7 +7,9 @@ body {
   justify-content: center;
   align-items: center;
   overflow: auto;
+  flex-direction: column;
 }
+
 
 main,
 #recoverBg {
@@ -18,19 +20,42 @@ main,
 }
 
 main {
-  width: 100%;
-  height: 100%;
+  width: clamp(80%, 70vw, 60%);
+  height: calc(100vh / 1.5);
+  /* height: 100%; */
   max-width: calc(100vw / 1.5);
-  max-height: calc(100vh / 1.5);
-  min-height: 450px;
+  /* max-height: calc(100vh / 1.5); */
+  min-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;justify-content: center;
 }
 
-h4 {
+.switchBg{
+  display: flex;
+  /* flex-direction: column; */
+  width: 80%;
+  margin-top: 1rem;
+  align-items: center;
+  display: none;
+}
+
+.switchLabel {
+  text-align: start;
+  color: var(--sub-text-color);
+  line-height: 1.5;
+}
+
+.switchButton.externalSwitch {
+  /* width: 100%; */
+  background: var(--bg-color);
+  border: none;
+}
+
+h4,h5 {
+  text-align: center;
   display: inline-block;
-  margin: 0;
+  margin: 3px;
 }
 
 h3 {
@@ -100,7 +125,7 @@ form {
 
 input,
 .top-text,
-button {
+button, .switchButton.externalSwitch {
   margin: clamp(0.5rem, 3vw, 0.1rem) 0;
   padding: var(--button-padding);
 }
@@ -167,6 +192,15 @@ input {
   object-fit: cover;
 }
 
+#infoImage::after{
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--darkGradientOverlay);
+  position: absolute;
+  z-index: 1;
+}
+
 #infoBg {
   position: absolute;
   width: 100%;
@@ -189,7 +223,7 @@ input {
   opacity: 0.9;
 }
 
-#switchButton {
+.switchButton {
   background-color: transparent;
   border: solid 2px;
   width: 50%;
@@ -200,15 +234,15 @@ input {
   transition: background-color 300ms;
 }
 
-#switchButton:hover * {
+.switchButton:hover * {
   transition: color 300ms;
 }
 
-#switchButton:hover * {
+.switchButton:hover * {
   color: black;
 }
 
-#switchButton:hover {
+.switchButton:hover {
   background-color: white;
 }
 
@@ -217,11 +251,11 @@ input {
   width: 100vw;
   position: absolute;
   backdrop-filter: blur(10px);
-  display: none;
   align-items: center;
   justify-content: center;
   animation: fadeOut 200ms;
   opacity: 0;
+  display: none;
 }
 
 #recoverSection.active {
@@ -232,6 +266,8 @@ input {
 
 #recoverBg {
   width: 80%;
+  min-width: 310px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -265,20 +301,10 @@ input {
 }
 
 #recoverInfoText {
+  width: 100%;
   padding: var(--padding);
   padding-top: 10px;
   padding-bottom: 0;
-}
-
-#closeRecovery {
-  background: var(--bg-color);
-  padding: 5px;
-  border-radius: var(--button-radius);
-  transition: all 200ms;
-}
-
-#recoverBgTop i:hover {
-  background: var(--primary-color);
 }
 
 #recoverForm button {
@@ -289,24 +315,38 @@ input {
 @media screen and (max-width: 992px) {
   /*-==========- Laptops and big tablet screens -==========*/
   main {
-    max-width: calc(100vw / 1.3);
+    max-width:  90%;
     max-height: calc(100vh / 1.3);
   }
 }
 
 @media screen and (max-width: 768px) {
   /*-==========- Tablet screens -==========*/
+  #infoPanel {
+    display: none;
+  }
+
   main {
-    max-width: calc(100vw / 1.2);
+    min-width: 310px;
+    max-width: 380px;
     max-height: calc(100vh / 1.5);
+  }
+
+  .switchBg {
+    display: flex;
+  }
+  
+  .panel.active {
+    animation: none;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 576px) {
   /*-==========- Mini-tablets screens -==========*/
   form,
-  .top-text {
-    width: 90%;
+  .top-text, .switchButton.externalSwitch {
+    width: 85%;
   }
 
   form {
@@ -316,25 +356,23 @@ input {
     width: 85%;
     flex: 1;
     min-height: min-content;
+    animation: none;
   }
-  main {
+  /* main {
     overflow-y: auto;
     flex-direction: column;
     margin: 0;
     flex-direction: column-reverse;
-    max-width: 100%;
-    min-height: 100%;
     background: none;
     border-radius: 0;
   }
 
   input {
     background-color: var(--secondary-bg-color);
-  }
+  } */
   
   .panel {
     max-height: 385px;
-    animation: slideShrinkClose 2500ms;
   }
   
   .panel.active {
@@ -342,35 +380,9 @@ input {
     margin-top: 1rem;
     margin-bottom: 1rem;
     max-height: 385px;
-    animation: slideShrinkOpen 300ms;
+    animation: none;
     height: 100%;
     
-  }
-  
-  @keyframes slideShrinkOpen {
-    0% {
-      max-height: 0;
-    }
-    100% {
-      max-height: 385px;
-    }
-  }
-  
-  @keyframes slideShrinkClose {
-    0% {
-      max-height: 385px;
-    }
-    100% {
-      max-height: 0;
-    }
-  }
-  
-  
-
-  #infoPanel {
-    height: fit-content;
-    min-height: 250px;
-    width: 100%;
   }
 }
 
